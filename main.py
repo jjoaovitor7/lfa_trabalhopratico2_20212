@@ -5,6 +5,7 @@ import os
 
 from src.File import File
 from src.Grammar import Grammar
+from src.Word import Word
 
 
 def main():
@@ -18,6 +19,9 @@ def main():
     grammar.load()
     grammar.print()
 
+    # PALAVRA
+    word = Word()
+    word.load()
 
 if __name__ == "__main__":
     main()
