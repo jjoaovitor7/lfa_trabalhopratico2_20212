@@ -5,13 +5,14 @@ import os
 
 from src.File import File
 from src.Grammar import Grammar
-from src.Word import Word
+from src.Expression import Expression
+from src.Table import Table
 
 
 def main():
-    # LEITURA DE ARQUIVO
+    # LEITURA DO ARQUIVO
     path__current = os.getcwd()
-    file = File(f"{path__current}{os.sep}files{os.sep}2.cyk")
+    file = File(f"{path__current}{os.sep}files{os.sep}1.cyk")
     file.open()
 
     # REPRESENTAÇÃO DA GRAMÁTICA
@@ -19,9 +20,15 @@ def main():
     grammar.load()
     grammar.print()
 
-    # PALAVRA
-    word = Word()
-    word.load()
+    # EXPRESSÃO
+    expr = Expression()
+    expr.load()
+
+    # TABELA DE PARSING
+    table = Table()
+    table.generateTable(grammar.get(), expr.get())
+    table.print()
+
 
 if __name__ == "__main__":
     main()
