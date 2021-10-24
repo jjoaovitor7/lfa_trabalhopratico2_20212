@@ -38,23 +38,19 @@ class Table (object):
                     for j in grammar[i]:
                         for k in list(j):
                             if (k.islower() and k == symbol):
-                                self.m[len(self.m)-1][index] = i
+                                try:
+                                    self.m[len(self.m)-1][index].append(i)
+                                except:
+                                    self.m[len(self.m)-1][index] = [i]
                 index += 1
 
             # MONTANDO AS OUTRAS LINHAS A PARTIR DA "LINHA BASE"
             for i in reversed(range(0, len(self.m))):
                 for j in range(0, len(self.m[i])):
-                    for k in grammar:
-                        for l in grammar[k]:
-                            try:
-                                if ("".join(l) == f"{self.m[i][j]}{self.m[i][j+1]}".replace("*", "")):
-                                    self.m[i-1][j] = k
-                            except IndexError as e:
-                                # if ("".join(l) == f"{self.m[i][j-1]}{self.m[i][j]}".replace("*", "")):
-                                #     self.m[i-1][j] = k
-                                # print(e)
+                    for k in range(0, len(self.m[i][j])):
+                        for l in grammar:
+                            for n in grammar[l]:
                                 pass
-
         fillTable(self, grammar, expr)
 
     def print(self):
