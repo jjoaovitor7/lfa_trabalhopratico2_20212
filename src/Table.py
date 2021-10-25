@@ -10,7 +10,7 @@ class Table (object):
 
         Parâmetros
         ----------
-        grammar : Dict.
+        grammar : dict
         expr    : str
         """
 
@@ -27,7 +27,7 @@ class Table (object):
 
             Parâmetros
             ----------
-            grammar : Dict.
+            grammar : dict
             expr    : str
             """
 
@@ -44,13 +44,29 @@ class Table (object):
                                     self.m[len(self.m)-1][index] = [i]
                 index += 1
 
-            # MONTANDO AS OUTRAS LINHAS A PARTIR DA "LINHA BASE"
             for i in reversed(range(0, len(self.m))):
                 for j in range(0, len(self.m[i])):
-                    for k in range(0, len(self.m[i][j])):
-                        for l in grammar:
-                            for n in grammar[l]:
-                                pass
+                    self.m[i][j] = ",".join(self.m[i][j])
+
+            # MONTANDO SEGUNDA LINHA
+            for i in reversed(range(len(self.m))):
+
+                # "POUPAR PROCESSAMENTO"
+                if (i > (len(self.m) - 1)):
+                    break
+
+                for j in range(0, len(self.m[i])-1):
+                    _aux1 = self.m[i][j].split(",")
+                    _aux2 = self.m[i][j+1].split(",")
+
+                    for _i in range(0, len(_aux1)):
+                        for _j in range(0, len(_aux2)):
+                            for l in grammar:
+                                for n in grammar[l]:
+                                    if(f"{_aux1[_i]}{_aux2[_j]}".replace("*", "") == "".join(n)):
+                                        self.m[i-1][j] = l
+            
+            # TODO: MONTANDO AS OUTRAS LINHAS
         fillTable(self, grammar, expr)
 
     def print(self):
