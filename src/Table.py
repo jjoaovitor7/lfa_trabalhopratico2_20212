@@ -31,22 +31,18 @@ class Table (object):
             expr    : str
             """
 
-            # MONTANDO "LINHA BASE"
-            index = 0
-            for symbol in expr:
-                for i in grammar:
-                    for j in grammar[i]:
-                        for k in list(j):
-                            if (k.islower() and k == symbol):
-                                try:
-                                    self.m[len(self.m)-1][index].append(i)
-                                except:
-                                    self.m[len(self.m)-1][index] = [i]
-                index += 1
+            # MONTANDO LINHA BASE
+            for i in range(0, len(expr)):
+                for key in grammar:
+                    for values in grammar[key]:
+                        for value in list(values):
+                            # RETIRANDO *
+                            self.m[len(self.m)-1][i] = self.m[len(self.m)-1][i].replace("*", "")
 
-            for i in reversed(range(0, len(self.m))):
-                for j in range(0, len(self.m[i])):
-                    self.m[i][j] = ",".join(self.m[i][j])
+                            if (value.islower() and expr[i] == value):
+                                self.m[len(self.m)-1][i] += key
+                # QUANDO TIVER MAIS DE UM NÃO-TERMINAL
+                self.m[len(self.m)-1][i] = ",".join(self.m[len(self.m)-1][i])
 
             # MONTANDO SEGUNDA LINHA
             for i in reversed(range(len(self.m))):
@@ -66,7 +62,6 @@ class Table (object):
                                     if(f"{_aux1[_i]}{_aux2[_j]}".replace("*", "") == "".join(n)):
                                         self.m[i-1][j] = l
             
-            # TODO: MONTANDO AS OUTRAS LINHAS
         fillTable(self, grammar, expr)
 
     def print(self):
