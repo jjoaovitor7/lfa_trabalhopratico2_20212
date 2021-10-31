@@ -42,27 +42,26 @@ class Table (object):
                             if (value.islower() and expr[i] == value):
                                 self.m[len(self.m)-1][i] += key
                 # QUANDO TIVER MAIS DE UM NÃO-TERMINAL
-                self.m[len(self.m)-1][i] = ",".join(self.m[len(self.m)-1][i])
+                self.m[len(self.m)-1][i] = ",".join(self.m[len(self.m)-1][i])            
 
-            # MONTANDO SEGUNDA LINHA
-            for i in reversed(range(len(self.m))):
+            self.m.reverse()
+            # MONTANDO AS OUTRAS LINHAS
+            # n = len(expr)
+            # for i in range(2, n):
+            #     for j in range(1, n-i+1):
+            #         for k in range(1, i-1):
+            #             for key in grammar:
+            #                 for values in grammar[key]:
+            #                     if (len(values) == 2):
+            #                         # print(f"{values[0]} {self.m[j][k]} | {values[1]} {self.m[j+k][i-k]}")
+            #                         if (values[0] in self.m[j][k] and values[1] in self.m[j+k][i-k]):
+            #                             self.m[j][i] = key
 
-                # "POUPAR PROCESSAMENTO"
-                if (i > (len(self.m) - 1)):
-                    break
 
-                for j in range(0, len(self.m[i])-1):
-                    _aux1 = self.m[i][j].split(",")
-                    _aux2 = self.m[i][j+1].split(",")
 
-                    for _i in range(0, len(_aux1)):
-                        for _j in range(0, len(_aux2)):
-                            for l in grammar:
-                                for n in grammar[l]:
-                                    if(f"{_aux1[_i]}{_aux2[_j]}".replace("*", "") == "".join(n)):
-                                        self.m[i-1][j] = l
-            
-        fillTable(self, grammar, expr)
+
+
+        fillTable(self, grammar, expr)  
 
     def print(self):
         """Printar tabela."""
