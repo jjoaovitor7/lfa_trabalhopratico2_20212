@@ -46,20 +46,21 @@ class Table (object):
 
             self.m.reverse()
             # MONTANDO AS OUTRAS LINHAS
-            # n = len(expr)
-            # for i in range(2, n):
-            #     for j in range(1, n-i+1):
-            #         for k in range(1, i-1):
-            #             for key in grammar:
-            #                 for values in grammar[key]:
-            #                     if (len(values) == 2):
-            #                         # print(f"{values[0]} {self.m[j][k]} | {values[1]} {self.m[j+k][i-k]}")
-            #                         if (values[0] in self.m[j][k] and values[1] in self.m[j+k][i-k]):
-            #                             self.m[j][i] = key
-
-
-
-
+            n = len(expr)
+            for i in range(1, n):
+                for j in range(0, n-i):
+                    for k in range(0, i+1):
+                        for key in grammar:
+                            for values in grammar[key]:
+                                if (len(values) == 2):
+                                    self.m[j][k] = self.m[j][k].replace("*", "")
+                                    self.m[j+k][i-k] = self.m[j+k][i-k].replace("*", "")
+                                    # print(f"{values[0]} {self.m[j][k]} | {values[1]} {self.m[j+k][i-k]}")
+                                    if (values[0] in self.m[j][k] and values[1] in self.m[j+k][i-k]):
+                                        try:
+                                            self.m[j+1][i] = key
+                                        except:
+                                            self.m[i][j] = key
 
         fillTable(self, grammar, expr)  
 
