@@ -57,10 +57,7 @@ class Table (object):
                                     self.m[j+k][i-k] = self.m[j+k][i-k].replace("*", "")
                                     # print(f"{values[0]} {self.m[j][k]} | {values[1]} {self.m[j+k][i-k]}")
                                     if (values[0] in self.m[j][k] and values[1] in self.m[j+k][i-k]):
-                                        try:
-                                            self.m[j+1][i] = key
-                                        except:
-                                            self.m[i][j] = key
+                                        self.m[j+1][i] = key
 
         fillTable(self, grammar, expr)  
 
