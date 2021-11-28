@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>[LFA] Algoritmo CYK</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <div class="container mt-5">
+      <div class="row">
+        <h3>Gramática</h3>
+        {% for key in grammar %}
+        <p>{{ key }} : {{ grammar[key] }}</p>
+        {% endfor %}
+
+        <h3>Expressão a ser verificada</h3>
+        <form action="/verify" method="POST">
+          <div class="form-group">
+            <label for="expression"></label>
+            <input
+              class="form-control"
+              type="text"
+              id="expression"
+              name="expression"
+            />
+          </div>
+          <button id="btnEnviar" class="btn btn-primary mt-1" type="submit">
+            Enviar
+          </button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

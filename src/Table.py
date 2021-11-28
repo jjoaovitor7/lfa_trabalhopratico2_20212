@@ -37,12 +37,13 @@ class Table (object):
                     for values in grammar[key]:
                         for value in list(values):
                             # RETIRANDO *
-                            self.m[len(self.m)-1][i] = self.m[len(self.m)-1][i].replace("*", "")
+                            self.m[len(self.m)-1][i] = self.m[len(self.m) -
+                                                              1][i].replace("*", "")
 
                             if (value.islower() and expr[i] == value):
                                 self.m[len(self.m)-1][i] += key
                 # QUANDO TIVER MAIS DE UM NÃO-TERMINAL
-                self.m[len(self.m)-1][i] = ",".join(self.m[len(self.m)-1][i])            
+                self.m[len(self.m)-1][i] = ",".join(self.m[len(self.m)-1][i])
 
             self.m.reverse()
             # MONTANDO AS OUTRAS LINHAS
@@ -52,17 +53,22 @@ class Table (object):
                     for k in range(0, i+1):
                         for key in grammar:
                             for values in grammar[key]:
+                                self.m[j][k] = self.m[j][k].replace(
+                                    "*", "")
+                                self.m[j+k][i-k] = self.m[j +
+                                                          k][i-k].replace("*", "")
                                 if (len(values) == 2):
-                                    self.m[j][k] = self.m[j][k].replace("*", "")
-                                    self.m[j+k][i-k] = self.m[j+k][i-k].replace("*", "")
                                     # print(f"{values[0]} {self.m[j][k]} | {values[1]} {self.m[j+k][i-k]}")
                                     if (values[0] in self.m[j][k] and values[1] in self.m[j+k][i-k]):
                                         self.m[j+1][i] = key
 
-        fillTable(self, grammar, expr)  
+        fillTable(self, grammar, expr)
 
     def print(self):
         """Printar tabela."""
 
         for i in self.m:
             print(i)
+
+    def get(self):
+        return self.m
