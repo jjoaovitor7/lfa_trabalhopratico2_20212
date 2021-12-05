@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, render_template, session
 from src.Grammar import Grammar
 from src.Expression import Expression
-from src.Table import Table
+from src.CYK import CYK
 
 app = Flask(__name__, template_folder="views")
 app.secret_key = 'secret'
@@ -26,11 +26,11 @@ def register():
 
 @app.route("/verify", methods=["POST"])
 def verify():
-    table = Table()
-    table.generateTable(session.get("grammar", None),
+    cyk = CYK()
+    cyk.generateTable(session.get("grammar", None),
                         request.form["expression"])
 
-    return render_template("verify.html", table=table.get())
+    return render_template("verify.html", table=cyk.get(), verify=cyk.verify())
 
 
 if __name__ == "__main__":

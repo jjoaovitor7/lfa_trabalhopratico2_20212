@@ -6,7 +6,7 @@ import os
 from src.File import File
 from src.Grammar import Grammar
 from src.Expression import Expression
-from src.Table import Table
+from src.CYK import CYK
 
 
 def main():
@@ -24,11 +24,11 @@ def main():
     expr = Expression()
     expr.load()
 
-    # TABELA DE PARSING
-    table = Table()
-    table.generateTable(grammar.get(), expr.get())
-    table.print()
-
+    # CYK
+    cyk = CYK()
+    cyk.generateTable(grammar.get(), expr.get())
+    cyk.print()
+    print(cyk.verify())
 
 if __name__ == "__main__":
     main()

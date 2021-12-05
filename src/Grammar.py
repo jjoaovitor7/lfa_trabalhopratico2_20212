@@ -33,15 +33,10 @@ class Grammar (object):
             values = arr_to_string__aux.split("|")
 
             for i in range(0, len(values)):
-                _aux = []
-                for j in list(values[i]):
-                    _aux.append(j)
-                values[i] = _aux
-            try:
-                self.grammar[key__format] = self.grammar[key__format] + values
-            except:
-                self.grammar[key__format] = values
-
+                try:
+                    self.grammar[key__format] = self.grammar[key__format] + [values[i]]
+                except:
+                    self.grammar[key__format] = [values[i]]
     def get(self):
         """Retornar a gramática."""
 
